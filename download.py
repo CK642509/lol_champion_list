@@ -3,8 +3,10 @@ import pandas as pd
 from pathlib import Path
 
 
-def download(path, name):
+def download(path, name: str):
+    name = name.replace(" ", "").replace("'", "").replace("&", "").replace(".", "")
     url = f"https://lol-skin.weblog.vc/img/champion/{name}.png"
+    print(url)
     response = requests.get(url)
     if response.status_code == 200:
         print(200)
@@ -26,4 +28,5 @@ if __name__ == '__main__':
     for champion in champion_list:
         download(path, champion)
         print(f'{count}. {champion} OK')
+        print("---")
         count += 1
